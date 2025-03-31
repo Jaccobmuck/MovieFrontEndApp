@@ -48,7 +48,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  /// ✅ **App Bar with Dark Mode Toggle**
   AppBar _buildAppBar() {
     return AppBar(
       title: const Text('Movie Rental App', style: TextStyle(color: Colors.white)),
@@ -63,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  /// ✅ **Login Box (Container)**
+
   Widget _buildLoginContainer() {
     return Container(
       width: 400,
@@ -88,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  /// ✅ **Reusable Input Field**
+
   Widget _buildTextField({required TextEditingController controller, required String hintText, bool obscureText = false}) {
     return TextField(
       controller: controller,
@@ -103,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  /// ✅ **Login Button**
+
   Widget _buildLoginButton() {
     return ElevatedButton(
       onPressed: _login,

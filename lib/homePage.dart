@@ -26,14 +26,14 @@ class HomePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            HeroBanner(), // 🔥 Extracted Hero Banner
-            TrendingMovies(), // 🎥 Extracted Trending Movies
-            NewReleases(), // 🌟 Extracted New Releases
-            ClassicMovies(), // 🎞️ Extracted Classic Movies
+            HeroBanner(),
+            TrendingMovies(),
+            NewReleases(),
+            ClassicMovies(),
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBar(), // 🏠 Extracted Bottom Navigation Bar
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 
