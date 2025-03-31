@@ -1,0 +1,46 @@
+name: testproject
+description: A movie rental app built with Flutter.
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  video_player: ^2.7.0
+
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/movies/trendingMovies/bladerunner2049.jpg
+    - assets/movies/trendingMovies/Interstellar.jpg
+    - assets/movies/trendingMovies/Oppenheimer.jpg
+    - assets/movies/trendingMovies/Creed3.jpg
+    - assets/movies/trendingMovies/2Fast2Furious.jpg
+    - assets/movies/trendingMovies/tokyoDrift.jpg
+
+    - assets/movies/Smile.jpg
+
+    - assets/movies/newReleases/captianAmerica.jpg
+    - assets/movies/newReleases/lilo_Stitch.jpg
+    - assets/movies/newReleases/liveActionHowToTrainYourDragon.jpg
+    - assets/movies/newReleases/minecraftMovie.jpg
+    - assets/movies/newReleases/wicked.jpg
+
+    - assets/movies/classicMovies/40YearOldBirgin.jpg
+    - assets/movies/classicMovies/backToTheFuture.jpg
+    - assets/movies/classicMovies/grinch.jpg
+    - assets/movies/classicMovies/happyFeet.jpg
+    - assets/movies/classicMovies/HomeAlone.jpg
+    - assets/movies/classicMovies/jaws.jpg
+    - assets/movies/classicMovies/theIncredibles.jpg
+
+
+flutter_assets:
+  android: true
+  ios: true
+  web: true
+  windows: true
+  macos: true
+  linux: true
