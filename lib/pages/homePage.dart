@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'widgets/trendingMovies.dart';
-import 'widgets/newReleases.dart';
-import 'widgets/classicMovies.dart';
-import 'widgets/heroBanner.dart';
-import 'widgets/bottomNavBar.dart';
+import '../widgets/trendingMovies.dart';
+import '../widgets/newReleases.dart';
+import '../widgets/classicMovies.dart';
+import '../widgets/heroBanner.dart';
+import '../widgets/bottomNavBar.dart';
 
 class HomePage extends StatelessWidget {
   @override

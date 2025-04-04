@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 
 
-import 'package:testproject/main.dart';
+import 'package:testproject/pages/main.dart';
 
 void main() {
 
