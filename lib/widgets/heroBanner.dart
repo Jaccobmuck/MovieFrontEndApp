@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class HeroBanner extends StatefulWidget {
   @override
@@ -7,17 +7,22 @@ class HeroBanner extends StatefulWidget {
 }
 
 class _HeroBannerState extends State<HeroBanner> {
-  late VideoPlayerController _controller;
+  late YoutubePlayerController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset("assets/movies/InterstellarTrailer.mp4")
-      ..initialize().then((_) {
-        setState(() {});
-        _controller.play();
-        _controller.setLooping(true);
-      });
+    _controller = YoutubePlayerController(
+      initialVideoId: YoutubePlayer.convertUrlToId("https://www.youtube.com/watch?v=2LqzF5WauAw")!,
+      flags: const YoutubePlayerFlags(
+        autoPlay: true,
+        mute: false,
+        loop: true,
+        hideControls: true,
+        disableDragSeek: true,
+        showLiveFullscreenButton: false,
+      ),
+    );
   }
 
   @override
@@ -30,11 +35,14 @@ class _HeroBannerState extends State<HeroBanner> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
+        SizedBox(
           height: 250,
-          child: _controller.value.isInitialized
-              ? VideoPlayer(_controller)
-              : Center(child: CircularProgressIndicator()),
+          width: double.infinity,
+          child: YoutubePlayer(
+            controller: _controller,
+            showVideoProgressIndicator: false,
+            progressIndicatorColor: Colors.deepPurple,
+          ),
         ),
         Container(
           height: 250,
@@ -58,13 +66,14 @@ class _HeroBannerState extends State<HeroBanner> {
               ),
               const SizedBox(height: 5),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  _controller.pause();
+                  // Navigate to a detail screen if you want
+                },
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple),
                 child: const Text(
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
                   "Watch Now",
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ],
