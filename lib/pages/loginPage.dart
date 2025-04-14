@@ -75,6 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
       child: Column(
+
         mainAxisSize: MainAxisSize.min,
         children: [
           _buildTextField(controller: _usernameController, hintText: 'Username'),
@@ -96,6 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
       decoration: InputDecoration(
         border: const OutlineInputBorder(),
         hintText: hintText,
+        hintStyle: const TextStyle(color: Colors.white),
         filled: true,
         fillColor: Colors.white.withOpacity(0.1),
       ),

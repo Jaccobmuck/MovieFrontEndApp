@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:testproject/pages/homePage.dart';
 import 'loginPage.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
@@ -17,8 +16,7 @@ void main() async {
         storageBucket: "mobiledev-eeafa.appspot.com",
         messagingSenderId: "960950703785",
         appId: "1:960950703785:web:0af80f1383e1820889fbb8",
-      )
-          : null,
+      ) : null,
     );
   }
 
@@ -31,7 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: HomePage(),
+      home: LoginPage(),
     );
   }
 }

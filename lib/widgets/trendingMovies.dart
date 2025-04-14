@@ -47,9 +47,9 @@ class TrendingMovies extends StatelessWidget {
 
   Widget movieCard(String imageUrl) {
     if (imageUrl.isEmpty) {
-      print("❌ Missing posterUrl — showing placeholder.");
+      print("Missing posterUrl — showing placeholder.");
     } else {
-      print("✅ Showing image: $imageUrl");
+      print("Showing image: $imageUrl");
     }
 
     return Container(
