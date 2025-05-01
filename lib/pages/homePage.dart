@@ -5,21 +5,15 @@ import '../widgets/bottomNavBar.dart';
 
 class HomePage extends StatelessWidget {
   final List<String> trendingPosters = [
-    'https://via.placeholder.com/120x160?text=Trending+1',
-    'https://via.placeholder.com/120x160?text=Trending+2',
-    'https://via.placeholder.com/120x160?text=Trending+3',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5dHUrUa99rxiCqLganH7SkpkA2JsLqelYSg&s'
   ];
 
   final List<String> newReleasePosters = [
-    'https://via.placeholder.com/120x160?text=New+1',
-    'https://via.placeholder.com/120x160?text=New+2',
-    'https://via.placeholder.com/120x160?text=New+3',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5dHUrUa99rxiCqLganH7SkpkA2JsLqelYSg&s'
   ];
 
   final List<String> classicPosters = [
-    'https://via.placeholder.com/120x160?text=Classic+1',
-    'https://via.placeholder.com/120x160?text=Classic+2',
-    'https://via.placeholder.com/120x160?text=Classic+3',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5dHUrUa99rxiCqLganH7SkpkA2JsLqelYSg&s'
   ];
 
   @override
