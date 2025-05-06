@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/movieService.dart';
+import '../models/movieModel.dart';
 
 class MovieGenre extends StatefulWidget{
   final String label;
@@ -12,7 +13,7 @@ class MovieGenre extends StatefulWidget{
 }
 
 class _MovieGenreState extends State<MovieGenre>{
-  late Future<List<Map<String, dynamic>>> _movies;
+  late Future<List<MovieModel>> _movies;
 
   @override
   void initState(){
@@ -34,7 +35,7 @@ class _MovieGenreState extends State<MovieGenre>{
           const SizedBox(height: 5),
           SizedBox(
             height: 160,
-            child: FutureBuilder<List<Map<String, dynamic>>>(
+            child: FutureBuilder<List<MovieModel>>(
               future: _movies,
               builder: (context, snapshot){
                 if(snapshot.connectionState == ConnectionState.waiting){
@@ -52,7 +53,7 @@ class _MovieGenreState extends State<MovieGenre>{
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index){
                     final movie = snapshot.data![index];
-                    return movieCard(movie['postedUrl'] ?? '');
+                    return movieCard(movie.postedUrl ?? '');
                   },
                 );
               },

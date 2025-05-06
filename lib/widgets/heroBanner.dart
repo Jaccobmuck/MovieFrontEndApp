@@ -1,37 +1,21 @@
+import 'dart:ui' as ui;
+import 'dart:html' as html;
 import 'package:flutter/material.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class HeroBanner extends StatefulWidget {
-  @override
-  _HeroBannerState createState() => _HeroBannerState();
-}
+class HeroBanner extends StatelessWidget {
+  final String videoId = "2LqzF5WauAw"; // Interstellar trailer
 
-class _HeroBannerState extends State<HeroBanner> {
-  late YoutubePlayerController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    final videoId = YoutubePlayer.convertUrlToId("https://www.youtube.com/watch?v=2LqzF5WauAw");
-    if (videoId == null) throw Exception("Invalid YouTube URL");
-
-    _controller = YoutubePlayerController(
-      initialVideoId: videoId,
-      flags: const YoutubePlayerFlags(
-        autoPlay: true,
-        mute: true, // needed to avoid browser blocking
-        loop: true,
-        hideControls: true,
-        disableDragSeek: true,
-        showLiveFullscreenButton: false,
-      ),
+  HeroBanner({super.key}) {
+    // Register the view factory once
+    // ignore: undefined_prefixed_name
+    ui.platformViewRegistry.registerViewFactory(
+      'youtube-iframe',
+          (int viewId) => html.IFrameElement()
+        ..width = 'full'
+        ..height = '500'
+        ..src = 'https://www.youtube.com/embed/$videoId?autoplay=1&mute=1&loop=1&playlist=$videoId&controls=0'
+        ..style.border = 'none',
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   @override
@@ -41,11 +25,7 @@ class _HeroBannerState extends State<HeroBanner> {
         SizedBox(
           height: 250,
           width: double.infinity,
-          child: YoutubePlayer(
-            controller: _controller,
-            showVideoProgressIndicator: false,
-            progressIndicatorColor: Colors.deepPurple,
-          ),
+          child: HtmlElementView(viewType: 'youtube-iframe'),
         ),
         Container(
           height: 250,
@@ -70,14 +50,10 @@ class _HeroBannerState extends State<HeroBanner> {
               const SizedBox(height: 5),
               ElevatedButton(
                 onPressed: () {
-                  _controller.pause();
-                  // TODO: Navigate to detail screen
+                  // Example: Navigate to a details page
                 },
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple),
-                child: const Text(
-                  "Watch Now",
-                  style: TextStyle(color: Colors.white),
-                ),
+                child: const Text("Watch Now", style: TextStyle(color: Colors.white)),
               ),
             ],
           ),
