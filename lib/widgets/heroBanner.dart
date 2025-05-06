@@ -12,12 +12,14 @@ class _HeroBannerState extends State<HeroBanner> {
   @override
   void initState() {
     super.initState();
-    _controller = YoutubePlayerController(
+    final videoId = YoutubePlayer.convertUrlToId("https://www.youtube.com/watch?v=2LqzF5WauAw");
+    if (videoId == null) throw Exception("Invalid YouTube URL");
 
-      initialVideoId: YoutubePlayer.convertUrlToId("https://www.youtube.com/watch?v=2LqzF5WauAw")!,
+    _controller = YoutubePlayerController(
+      initialVideoId: videoId,
       flags: const YoutubePlayerFlags(
         autoPlay: true,
-        mute: false,
+        mute: true, // needed to avoid browser blocking
         loop: true,
         hideControls: true,
         disableDragSeek: true,
@@ -69,7 +71,7 @@ class _HeroBannerState extends State<HeroBanner> {
               ElevatedButton(
                 onPressed: () {
                   _controller.pause();
-                  // Navigate to a detail screen if you want
+                  // TODO: Navigate to detail screen
                 },
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple),
                 child: const Text(
