@@ -7,6 +7,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  shared_preferences: ^2.2.2
   # video player
   video_player: ^2.7.0
   youtube_player_flutter: ^8.1.1

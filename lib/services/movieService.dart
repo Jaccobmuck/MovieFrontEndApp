@@ -1,20 +1,30 @@
 import 'dart:convert';
-import '../models/movieModel.dart';
+
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../models/movieModel.dart';
 
 class MovieService {
-  final String _baseUrl = "http://localhost:5296/Movie";
+  final String _baseUrl = "https://localhost:7106/Movie";
 
-  // Fetch all movies from the backend
-  Future<List<MovieModel>> getMovies() async { // TODO: add models folder later
+  Future<List<MovieModel>> getMovies() async {
     try {
-      final response = await http.get(Uri.parse("$_baseUrl/GetMovies"));
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('jwt');
+
+      final response = await http.get(
+        Uri.parse("$_baseUrl/GetMovies"),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+      );
 
       if (response.statusCode == 200) {
         List<dynamic> jsonList = json.decode(response.body);
         return jsonList.map((json) => MovieModel.fromJson(json)).toList();
-      }
-      else {
+      } else {
         throw Exception('Failed to load movies: ${response.statusCode}');
       }
     } catch (e) {
@@ -23,18 +33,23 @@ class MovieService {
     }
   }
 
-  // Fetch movies filtered by genre (e.g., "trending", "classics", etc.)
   Future<List<MovieModel>> getMoviesByGenre(String genre) async {
     try {
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('jwt');
+
       final response = await http.get(
         Uri.parse("$_baseUrl/GetMoviesByGenre?genre=$genre"),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
       );
 
       if (response.statusCode == 200) {
         List<dynamic> jsonData = json.decode(response.body);
         return jsonData.map((json) => MovieModel.fromJson(json)).toList();
-      }
-      else {
+      } else {
         throw Exception("Failed to load movies for genre: $genre");
       }
     } catch (e) {
@@ -43,15 +58,22 @@ class MovieService {
     }
   }
 
-  // Fetch a single movie by its ID
   Future<MovieModel> getMovieById(int id) async {
     try {
-      final response = await http.get(Uri.parse("$_baseUrl/GetMoviesById?id=$id"));
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('jwt');
+
+      final response = await http.get(
+        Uri.parse("$_baseUrl/GetMoviesById?id=$id"),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+      );
 
       if (response.statusCode == 200) {
         return MovieModel.fromJson(json.decode(response.body));
-      }
-      else {
+      } else {
         throw Exception("Failed to load movie with ID: $id");
       }
     } catch (e) {
