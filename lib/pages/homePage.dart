@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:testproject/widgets/movieGenre.dart';
 import '../widgets/heroBanner.dart';
 import '../widgets/bottomNavBar.dart';
-import '../widgets/movieGenre.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

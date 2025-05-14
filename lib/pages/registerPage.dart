@@ -1,38 +1,36 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'homePage.dart';
-import 'registerPage.dart';
+
 import '../services/authService.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  String _role = 'User';
   bool _darkMode = true;
   bool _isLoading = false;
 
-  void _login() async {
+  void _register() async {
     setState(() => _isLoading = true);
-    final success = await AuthService().login(
+    final success = await AuthService().register(
       _usernameController.text,
       _passwordController.text,
+      _role,
     );
     setState(() => _isLoading = false);
 
     if (success) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
-      );
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Registration successful')));
+      Navigator.pop(context);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Login failed. Please check credentials.")),
-      );
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Registration failed')));
     }
   }
 
@@ -41,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: _darkMode ? Colors.black : const Color(0xFFBCABAE),
       appBar: AppBar(
-        title: const Text('Movie Rental App', style: TextStyle(color: Colors.white)),
+        title: const Text('Register', style: TextStyle(color: Colors.white)),
         backgroundColor: _darkMode ? Colors.grey[900] : const Color(0xFF66D7D1),
         actions: [
           const Text('Light mode', style: TextStyle(color: Colors.white)),
@@ -68,15 +66,25 @@ class _LoginPageState extends State<LoginPage> {
               _buildTextField(controller: _usernameController, hintText: 'Username'),
               const SizedBox(height: 10),
               _buildTextField(controller: _passwordController, hintText: 'Password', obscureText: true),
+              const SizedBox(height: 10),
+              DropdownButtonFormField<String>(
+                value: _role,
+                dropdownColor: _darkMode ? Colors.grey[800] : Colors.white,
+                decoration: InputDecoration(
+                  labelText: 'Role',
+                  labelStyle: const TextStyle(color: Colors.white),
+                  filled: true,
+                  fillColor: Colors.white.withOpacity(0.1),
+                  border: const OutlineInputBorder(),
+                ),
+                style: const TextStyle(color: Colors.white),
+                items: ['User', 'Admin', 'Guest']
+                    .map((role) => DropdownMenuItem(value: role, child: Text(role)))
+                    .toList(),
+                onChanged: (value) => setState(() => _role = value!),
+              ),
               const SizedBox(height: 20),
-              _isLoading ? const CircularProgressIndicator() : _buildLoginButton(),
-              const SizedBox(height: 12),
-              TextButton(
-                onPressed: () {
-                 Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterPage()));
-                },
-                child: const Text("Don't have an account? Register here", style: TextStyle(color: Colors.white70)),
-              )
+              _isLoading ? const CircularProgressIndicator() : _buildRegisterButton(),
             ],
           ),
         ),
@@ -99,15 +107,15 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildLoginButton() {
+  Widget _buildRegisterButton() {
     return ElevatedButton(
-      onPressed: _login,
+      onPressed: _register,
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.deepPurple,
         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
-      child: const Text("Login", style: TextStyle(color: Colors.white)),
+      child: const Text("Register", style: TextStyle(color: Colors.white)),
     );
   }
 }
