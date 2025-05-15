@@ -3,15 +3,14 @@ import 'dart:html' as html;
 import 'package:flutter/material.dart';
 
 class HeroBanner extends StatelessWidget {
-  final String videoId = "2LqzF5WauAw"; // Interstellar trailer
+  final String videoId = "Ur_DIHs92NM";
 
   HeroBanner({super.key}) {
-    // Register the view factory once
     // ignore: undefined_prefixed_name
     ui.platformViewRegistry.registerViewFactory(
       'youtube-iframe',
           (int viewId) => html.IFrameElement()
-        ..width = 'full'
+        ..width = '100%'
         ..height = '500'
         ..src = 'https://www.youtube.com/embed/$videoId?autoplay=1&mute=1&loop=1&playlist=$videoId&controls=0'
         ..style.border = 'none',
@@ -44,16 +43,17 @@ class HeroBanner extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                "Featured Movie: Interstellar",
+                "Featured Movie: Pride & Prejudice",
                 style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 5),
-              ElevatedButton(
+              ElevatedButton.icon(
                 onPressed: () {
-                  // Example: Navigate to a details page
+                  html.window.open("https://youtu.be/$videoId", "_blank");
                 },
+                icon: const Icon(Icons.open_in_new, color: Colors.white),
+                label: const Text("Watch on YouTube", style: TextStyle(color: Colors.white)),
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple),
-                child: const Text("Watch Now", style: TextStyle(color: Colors.white)),
               ),
             ],
           ),

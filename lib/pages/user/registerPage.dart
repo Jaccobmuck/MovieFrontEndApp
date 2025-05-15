@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../services/authService.dart';
+import '../../services/authService.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'homePage.dart';
+import '../../widgets/bottomNavBar.dart';
 import 'registerPage.dart';
-import '../services/authService.dart';
+import '../../services/authService.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
     if (success) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => MainNavigation()),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(

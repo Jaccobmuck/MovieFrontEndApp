@@ -1,7 +1,7 @@
+// HomePage.dart
 import 'package:flutter/material.dart';
 import 'package:testproject/widgets/movieGenre.dart';
 import '../widgets/heroBanner.dart';
-import '../widgets/bottomNavBar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -34,7 +34,6 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBar(),
     );
   }
 }
